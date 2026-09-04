@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>קהילה היא מארג של קשרים</title>
+  <style>
+    :root {
+      --circle-size: 150px;
+      --overlap: 18px;
+      --border-color: #111;
+      --page-padding: 20px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: var(--page-padding);
+      font-family: Arial, Helvetica, sans-serif;
+      background: #fff;
+      color: #111;
+      direction: rtl;
+    }
+
+    h1 {
+      margin: 0 0 24px;
+      text-align: center;
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    #circlesContainer {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(calc(var(--circle-size) - var(--overlap)), 1fr));
+      justify-items: center;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      column-gap: calc(-1 * var(--overlap));
+      row-gap: calc(-1 * var(--overlap));
+    }
+
+    .circle {
+      width: var(--circle-size);
+      height: var(--circle-size);
+      border: 2px solid var(--border-color);
+      border-radius: 50%;
+      background: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 28px;
+      margin-left: calc(-1 * var(--overlap));
+      margin-top: calc(-1 * var(--overlap));
+      position: relative;
+    }
+
+    .circle-title {
+      border: 0;
+      background: transparent;
+      padding: 0;
+      margin: 0;
+      font: inherit;
+      font-size: 10px;
+      line-height: 1.35;
+      cursor: pointer;
+      color: #111;
+      text-align: center;
+      max-width: 90px;
+      overflow-wrap: anywhere;
+    }
+
+    .circle-title:hover,
+    .circle-title:focus-visible {
+      text-decoration: underline;
+    }
+
+    /* Modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.45);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 1000;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal {
+      width: min(420px, 100%);
+      max-height: 80vh;
+      overflow: auto;
+      background: #fff;
+      border-radius: 10px;
+      padding: 24px;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.28);
+      position: relative;
+      text-align: right;
+    }
+
+    .modal h2 {
+      margin: 0 0 14px;
+      font-size: 18px;
+    }
+
+    .modal p {
+      margin: 0 0 16px;
+      line-height: 1.6;
+      white-space: pre-wrap;
+    }
+
+    .modal a {
+      display: inline-block;
+      margin-top: 6px;
+    }
+
+    .close-button {
+      position: absolute;
+      top: 8px;
+      left: 10px;
+      border: 0;
+      background: transparent;
+      font-size: 26px;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    /* Keep at least two circles per row on narrow screens. */
+    @media (max-width: 420px) {
+      :root {
+        --circle-size: 132px;
+        --overlap: 14px;
+      }
+
+      body {
+        padding-left: 8px;
+        padding-right: 8px;
+      }
+
+      #circlesContainer {
+        grid-template-columns: repeat(2, calc(var(--circle-size) - var(--overlap)));
+        justify-content: center;
+      }
+
+      .circle {
+        padding: 22px;
+      }
+
+      .circle-title {
+        max-width: 82px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>קהילה היא מארג של קשרים (הקלק על קבוצת הווטסאפ לקבלת פרטים וקישור)</h1>
+
+  <main id="circlesContainer" aria-label="מעגלי הקהילה"></main>
+
+  <div id="modalBackdrop" class="modal-backdrop" aria-hidden="true">
+    <section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button id="closeModal" class="close-button" type="button" aria-label="סגירה">×</button>
+      <h2 id="modalTitle"></h2>
+      <p id="modalText"></p>
+      <a id="modalLink" href="#" target="_blank" rel="noopener noreferrer">פתיחת קישור</a>
+    </section>
+  </div>
+
+  <script src="community-circles.js"></script>
+</body>
+</html>
