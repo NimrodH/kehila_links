@@ -5,7 +5,7 @@
       "type": "pwa-msedge",
       "request": "launch",
       "name": "Open community circles",
-      "file": "${workspaceFolder}/community-circles.html"
+      "file": "${workspaceFolder}/index.html"
     }
   ]
 }
