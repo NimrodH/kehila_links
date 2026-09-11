@@ -111,7 +111,12 @@ function createCircles() {
     title.type = "button";
     title.textContent = item.title;
 
-    title.addEventListener("click", () => {
+    circle.addEventListener("click", () => {
+      showPopup(item);
+    });
+
+    title.addEventListener("click", (event) => {
+      event.stopPropagation();
       showPopup(item);
     });
 

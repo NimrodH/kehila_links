@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="1000" height="1000" viewBox="0 0 1000 1000"
+     aria-label="Tilted 3D metallic ring">
+  <defs>
+    <!-- metal body -->
+    <linearGradient id="metal" x1="8%" y1="18%" x2="92%" y2="82%">
+      <stop offset="0%"   stop-color="#f6f6f6"/>
+      <stop offset="10%"  stop-color="#bfbfbf"/>
+      <stop offset="23%"  stop-color="#585858"/>
+      <stop offset="34%"  stop-color="#dcdcdc"/>
+      <stop offset="48%"  stop-color="#8f8f8f"/>
+      <stop offset="63%"  stop-color="#4e4e4e"/>
+      <stop offset="77%"  stop-color="#d8d8d8"/>
+      <stop offset="90%"  stop-color="#7d7d7d"/>
+      <stop offset="100%" stop-color="#f0f0f0"/>
+    </linearGradient>
+
+    <!-- edge gloss -->
+    <linearGradient id="edgeGloss" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.92"/>
+      <stop offset="45%" stop-color="#ffffff" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.18"/>
+    </linearGradient>
+
+    <!-- inner shadow tint -->
+    <linearGradient id="innerShade" x1="18%" y1="12%" x2="84%" y2="90%">
+      <stop offset="0%" stop-color="#000000" stop-opacity="0.06"/>
+      <stop offset="55%" stop-color="#000000" stop-opacity="0.20"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.03"/>
+    </linearGradient>
+
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#000000" flood-opacity="0.14"/>
+    </filter>
+
+    <!-- ring compound path masks -->
+    <mask id="ringMask">
+      <rect width="1000" height="1000" fill="black"/>
+      <g transform="translate(500 500) rotate(-12) scale(1 1.08)">
+        <ellipse cx="0" cy="0" rx="360" ry="415" fill="white"/>
+        <ellipse cx="0" cy="0" rx="304" ry="359" fill="black"/>
+      </g>
+    </mask>
+
+    <clipPath id="outerClip">
+      <g transform="translate(500 500) rotate(-12) scale(1 1.08)">
+        <ellipse cx="0" cy="0" rx="360" ry="415"/>
+      </g>
+    </clipPath>
+
+    <clipPath id="innerHole">
+      <g transform="translate(500 500) rotate(-12) scale(1 1.08)">
+        <ellipse cx="0" cy="0" rx="304" ry="359"/>
+      </g>
+    </clipPath>
+  </defs>
+
+  <!-- main ring body -->
+  <g filter="url(#softShadow)">
+    <g transform="translate(500 500) rotate(-12) scale(1 1.08)">
+      <path fill="url(#metal)" fill-rule="evenodd"
+            d="
+              M 360 0
+              A 360 415 0 1 1 -360 0
+              A 360 415 0 1 1 360 0
+              Z
+              M 304 0
+              A 304 359 0 1 0 -304 0
+              A 304 359 0 1 0 304 0
+              Z"/>
+    </g>
+  </g>
+
+  <!-- subtle thickness emphasis -->
+  <g mask="url(#ringMask)">
+    <rect x="120" y="110" width="760" height="780" fill="url(#edgeGloss)" opacity="0.55"/>
+  </g>
+
+  <!-- darker right-side outer accent -->
+  <g clip-path="url(#outerClip)">
+    <path d="M770 120 C845 230 872 345 870 502 C867 675 824 806 748 902"
+          fill="none" stroke="#2f2f2f" stroke-width="26" stroke-linecap="round" opacity="0.22"/>
+    <path d="M770 120 C845 230 872 345 870 502 C867 675 824 806 748 902"
+          fill="none" stroke="#ffffff" stroke-width="8" stroke-linecap="round" opacity="0.15"/>
+  </g>
+
+  <!-- bright top-left highlight -->
+  <g mask="url(#ringMask)">
+    <path d="M235 210 C335 108 463 70 610 84 C700 92 776 122 836 178"
+          fill="none" stroke="#ffffff" stroke-width="18" stroke-linecap="round" opacity="0.34"/>
+  </g>
+
+  <!-- inner rim shading to enhance 3D -->
+  <g clip-path="url(#innerHole)">
+    <ellipse cx="500" cy="500" rx="338" ry="398"
+             transform="rotate(-12 500 500) scale(1 1.08)"
+             fill="none" stroke="url(#innerShade)" stroke-width="22" opacity="0.90"/>
+  </g>
+
+  <!-- thin crisp edges -->
+  <g transform="translate(500 500) rotate(-12) scale(1 1.08)">
+    <ellipse cx="0" cy="0" rx="360" ry="415"
+             fill="none" stroke="#9e9e9e" stroke-width="1.6" opacity="0.70"/>
+    <ellipse cx="0" cy="0" rx="304" ry="359"
+             fill="none" stroke="#6f6f6f" stroke-width="1.4" opacity="0.55"/>
+    <ellipse cx="0" cy="0" rx="306" ry="361"
+             fill="none" stroke="#ffffff" stroke-width="1.1" opacity="0.45"/>
+  </g>
+</svg>

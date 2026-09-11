@@ -8,7 +8,8 @@
   <style>
     :root {
       --circle-size: 150px;
-      --overlap: 18px;
+      --overlap: 40px;
+      --row-overlap: 40px;
       --border-color: #111;
       --page-padding: 20px;
     }
@@ -35,19 +36,24 @@
 
     #circlesContainer {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(calc(var(--circle-size) - var(--overlap)), 1fr));
+      grid-template-columns: repeat(auto-fit, calc(var(--circle-size) - var(--overlap)));
+      grid-auto-rows: calc(var(--circle-size) - var(--row-overlap));
       justify-items: center;
       align-items: center;
       max-width: 1200px;
       margin: 0 auto;
-      column-gap: calc(-1 * var(--overlap));
-      row-gap: calc(-1 * var(--overlap));
+      justify-content: center;
+      column-gap: 0;
+      row-gap: 0;
     }
 
     .circle {
+      --ring-inset: 7px;
+      --circle-fill: rgba(55, 145, 205, 0.5);
+
       width: var(--circle-size);
       height: var(--circle-size);
-      border: 2px solid var(--border-color);
+      border: 0;
       border-radius: 50%;
       background: transparent;
       display: flex;
@@ -55,9 +61,35 @@
       justify-content: center;
       text-align: center;
       padding: 28px;
-      margin-left: calc(-1 * var(--overlap));
-      margin-top: calc(-1 * var(--overlap));
+      margin: 0;
       position: relative;
+      isolation: isolate;
+      transform-style: preserve-3d;
+      transform: perspective(700px) rotateX(7deg) rotateZ(-9deg);
+      filter: drop-shadow(5px 8px 5px rgba(0, 0, 0, 0.18));
+      z-index: 1;
+    }
+
+    .circle::before {
+      content: "";
+      position: absolute;
+      inset: var(--ring-inset);
+      border-radius: 50%;
+      background: url("tilted_3d_ring.svg") center / 150% 150% no-repeat,
+        var(--circle-fill);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    /* Alternate the top layer where neighboring rings overlap. */
+    .circle:nth-child(odd) {
+      z-index: 3;
+    }
+
+    .circle:nth-child(even) {
+      --circle-fill: rgba(226, 145, 52, 0.5);
+      z-index: 2;
+      transform: perspective(700px) rotateX(7deg) rotateZ(9deg);
     }
 
     .circle-title {
@@ -73,6 +105,9 @@
       text-align: center;
       max-width: 90px;
       overflow-wrap: anywhere;
+      position: relative;
+      z-index: 2;
+      transform: rotateZ(4deg);
     }
 
     .circle-title:hover,
@@ -139,7 +174,7 @@
     @media (max-width: 420px) {
       :root {
         --circle-size: 132px;
-        --overlap: 14px;
+        --overlap: 36px;
       }
 
       body {
