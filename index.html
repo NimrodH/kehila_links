@@ -81,12 +81,15 @@
       z-index: -1;
     }
 
-    /* Alternate the top layer where neighboring rings overlap. */
-    .circle:nth-child(odd) {
+    /* Checkerboard fill and top-layer alternation, assigned per row by
+       script/community-circles.js so the pattern holds for any column
+       count (the grid is auto-fit, so the column count changes with
+       viewport width). */
+    .circle.tone-a {
       z-index: 3;
     }
 
-    .circle:nth-child(even) {
+    .circle.tone-b {
       --circle-fill: rgba(226, 145, 52, 0.5);
       z-index: 2;
       transform: perspective(700px) rotateX(7deg) rotateZ(9deg);
@@ -193,24 +196,6 @@
 
       .circle-title {
         max-width: 82px;
-      }
-
-      /* With exactly two columns, nth-child(odd/even) colors by column
-         (left column always blue, right always orange) instead of by
-         row. Re-group by pairs of two so the fill alternates line by
-         line, matching the look on wider screens. */
-      .circle:nth-child(4n+1),
-      .circle:nth-child(4n+2) {
-        --circle-fill: rgba(55, 145, 205, 0.5);
-        z-index: 3;
-        transform: perspective(700px) rotateX(7deg) rotateZ(-9deg);
-      }
-
-      .circle:nth-child(4n+3),
-      .circle:nth-child(4n) {
-        --circle-fill: rgba(226, 145, 52, 0.5);
-        z-index: 2;
-        transform: perspective(700px) rotateX(7deg) rotateZ(9deg);
       }
     }
   </style>

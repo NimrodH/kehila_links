@@ -123,7 +123,45 @@ function createCircles() {
     circle.appendChild(title);
     circlesContainer.appendChild(circle);
   });
+
+  applyCheckerboard();
 }
+
+
+// The grid uses auto-fit columns, so the column count changes with
+// viewport width. Group circles into rows by their actual offsetTop and
+// alternate tones by (row + column) so the checkerboard holds for any
+// column count, not just odd counts or a hardcoded 2-column case.
+function applyCheckerboard() {
+  const circles = Array.from(circlesContainer.querySelectorAll(".circle"));
+  const rowTolerance = 2;
+
+  const rows = [];
+  circles.forEach((circle) => {
+    const top = circle.offsetTop;
+    const row = rows.find((r) => Math.abs(r.top - top) <= rowTolerance);
+    if (row) {
+      row.items.push(circle);
+    } else {
+      rows.push({ top, items: [circle] });
+    }
+  });
+
+  rows.forEach((row, rowIndex) => {
+    row.items.forEach((circle, colIndex) => {
+      const toneB = (rowIndex + colIndex) % 2 === 1;
+      circle.classList.toggle("tone-b", toneB);
+      circle.classList.toggle("tone-a", !toneB);
+    });
+  });
+}
+
+
+let resizeTimeout;
+window.addEventListener("resize", () => {
+  clearTimeout(resizeTimeout);
+  resizeTimeout = setTimeout(applyCheckerboard, 150);
+});
 
 
 function showPopup(item) {
