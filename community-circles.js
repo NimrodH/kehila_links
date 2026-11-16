@@ -1,93 +1,93 @@
 const circlesData = [
   {
     title: "רקפת השקטה",
-    text: "כולם",
-    link: "פתח קישור"
+    text: "קבוצה בה מפורסמות הודעות רשימיות מטעם ועד ההנהלה וועדות. מתוכננת לעבור לאפליקציה ישובית",
+    link: "גיל ובעלי תפקידים"
   },
   {
     title: "רקפת הודעות כלליות",
-    text: "כולם",
-    link: "פתח קישור"
+    text: "קבוצת שיח פתוחה של חברי רקפת",
+    link: "מנהלי הקבוצה, צריך להשלים"
   },
   {
     title: "מיד-ליד (מסירת חפצים)",
-    text: "כולם",
-    link: "פתח קישור"
+    text: "הצעות למסירת חפצים",
+    link: "מנהלי הקבוצה, צריך להשלים"
   },
   {
     title: "סליחה, אני רק שאלה",
-    text: "כולם",
-    link: "פתח קישור"
+    text: "תיאור הקבוצה, צריך להשלים",
+    link: "מנהלי הקבוצה, צריך להשלים"
   },
   {
     title: "נשות רקפת- הדור הבא",
     text: "נשות רקפת",
-    link: "פתח קישור"
+    link: "מנהלי הקבוצה, צריך להשלים"
   },
   {
     title: "בייביסיטר רקפת",
-    text: "כולם",
-    link: "פתח קישור"
+    text: "תיאור הקבוצה, צריך להשלים",
+    link: "מנהלי הקבוצה, צריך להשלים"
   },
   {
     title: "בוגרי רקפת",
     text: "חבר'ה שגדלו בישוב וכעת בוגרים",
-    link: "פתח קישור"
+    link: "מנהלי הקבוצה, צריך להשלים"
   },
   {
-    title: "חמשישים",
+    title: "וַתִיקֶפֶת הודעות בלבד",
     text: "גילאי 60+ בישוב",
-    link: "פתח קישור"
+    link: "רונית יונגר ושרה פרדס "
   },
   {
     title: "כלבים וחתולים",
     text: "כל בעלי כלבים וחתולים",
-    link: "פתח קישור"
+    link: "מנהלי הקבוצה, צריך להשלים"
   },
   {
     title: "אנשי הפיל",
     text: "מתנדבים בפיל",
-    link: "פתח קישור"
+    link: "מנהלי הקבוצה, צריך להשלים"
   },
   {
     title: "שומרי רקפת",
     text: "מתנדבי שמירה",
-    link: "פתח קישור"
+    link: "מנהלי הקבוצה, צריך להשלים"
   },
   {
     title: "שומרי רקפת דיונים",
     text: "מתנדבי השמירה",
-    link: "פתח קישור"
+    link: "מנהלי הקבוצה, צריך להשלים"
   },
   {
     title: "רקפת על סיבים",
     text: "",
-    link: "פתח קישור"
+    link: "מנהלי הקבוצה, צריך להשלים"
   },
   {
     title: "מינימרקט רקפת",
     text: "לא רק של הישוב",
-    link: "פתח קישור"
+    link: "מנהלי הקבוצה, צריך להשלים"
   },
   {
     title: "רקפת מזון",
     text: "",
-    link: "פתח קישור"
+    link: "מנהלי הקבוצה, צריך להשלים"
   },
   {
     title: "רקפת הודעות ממוקד משגב",
     text: "",
-    link: "פתח קישור"
+    link: "מנהלי הקבוצה, צריך להשלים"
   },
   {
     title: "רקפת למען הדמוקרטיה",
     text: "",
-    link: "פתח קישור"
+    link: "מנהלי הקבוצה, צריך להשלים"
   },
   {
     title: "מנחי קהילת רקפת",
     text: "קבוצת מנחי שולחנות עגולים",
-    link: "פתח קישור"
+    link: "מנהלי הקבוצה, צריך להשלים"
   }
 ];
 const circlesContainer = document.getElementById("circlesContainer");
@@ -95,7 +95,7 @@ const circlesContainer = document.getElementById("circlesContainer");
 const popupOverlay = document.getElementById("modalBackdrop");
 const popupTitle = document.getElementById("modalTitle");
 const popupText = document.getElementById("modalText");
-const popupLink = document.getElementById("modalLink");
+const popupManagers = document.getElementById("modalManagers");
 const closePopupButton = document.getElementById("closeModal");
 
 
@@ -174,13 +174,12 @@ function showPopup(item) {
   popupTitle.textContent = item.title;
   popupText.textContent = item.text;
 
+  // `link` now holds the group managers' names, shown as plain text.
   if (item.link && item.link.trim() !== "") {
-    popupLink.href = item.link;
-    popupLink.textContent = "פתח קישור";
-    popupLink.style.display = "inline-block";
+    popupManagers.textContent = "מנהלי הקבוצה: " + item.link;
+    popupManagers.style.display = "";
   } else {
-    popupLink.style.display = "none";
-    popupLink.removeAttribute("href");
+    popupManagers.style.display = "none";
   }
 
   popupOverlay.classList.add("open");

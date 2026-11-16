@@ -181,11 +181,6 @@
       white-space: pre-wrap;
     }
 
-    .modal a {
-      display: inline-block;
-      margin-top: 6px;
-    }
-
     .close-button {
       position: absolute;
       top: 8px;
@@ -226,7 +221,7 @@
 </head>
 
 <body>
-  <h1>קהילה היא מארג של קשרים (הקלק על קבוצת הווטסאפ לקבלת פרטים וקישור)</h1>
+  <h1>קהילה היא מארג של קשרים<br />(הקלק על קבוצת הווטסאפ לקבלת פרטים)</h1>
 
   <main id="circlesContainer" aria-label="מעגלי הקהילה"></main>
 
@@ -235,14 +230,14 @@
       <button id="closeModal" class="close-button" type="button" aria-label="סגירה">×</button>
       <h2 id="modalTitle"></h2>
       <p id="modalText"></p>
-      <a id="modalLink" href="#" target="_blank" rel="noopener noreferrer">פתיחת קישור</a>
+      <p id="modalManagers"></p>
     </section>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/babylonjs@9.36.0/babylon.js"></script>
   <!-- Bump ?v= when these files change so browsers don't run a cached copy. -->
   <script src="circles-3d.js?v=8"></script>
-  <script src="community-circles.js?v=2"></script>
+  <script src="community-circles.js?v=4"></script>
 </body>
 
 </html>
