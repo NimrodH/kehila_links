@@ -119,6 +119,29 @@
       text-decoration: underline;
     }
 
+    /* 3D mode (circles-3d.js): one canvas replaces the grid. The invisible
+       buttons sit over each circle for keyboard and screen-reader access. */
+    #circlesContainer.circles-3d {
+      display: block;
+      position: relative;
+    }
+
+    .circles-canvas {
+      display: block;
+      outline: none;
+      touch-action: manipulation;
+    }
+
+    .circle-focus-target {
+      position: absolute;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      border-radius: 50%;
+      opacity: 0;
+      pointer-events: none;
+    }
+
     /* Modal */
     .modal-backdrop {
       position: fixed;
@@ -216,7 +239,10 @@
     </section>
   </div>
 
-  <script src="community-circles.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/babylonjs@9.36.0/babylon.js"></script>
+  <!-- Bump ?v= when these files change so browsers don't run a cached copy. -->
+  <script src="circles-3d.js?v=8"></script>
+  <script src="community-circles.js?v=2"></script>
 </body>
 
 </html>

@@ -157,11 +157,17 @@ function applyCheckerboard() {
 }
 
 
-let resizeTimeout;
-window.addEventListener("resize", () => {
-  clearTimeout(resizeTimeout);
-  resizeTimeout = setTimeout(applyCheckerboard, 150);
-});
+// DOM fallback, used when circles-3d.js can't start (no WebGL, or the
+// Babylon.js script failed to load).
+function startDomCircles() {
+  createCircles();
+
+  let resizeTimeout;
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(applyCheckerboard, 150);
+  });
+}
 
 
 function showPopup(item) {
@@ -203,4 +209,9 @@ document.addEventListener("keydown", (event) => {
 });
 
 
-createCircles();
+const started3D =
+  window.Circles3D && window.Circles3D.start(circlesContainer, circlesData, showPopup);
+
+if (!started3D) {
+  startDomCircles();
+}
