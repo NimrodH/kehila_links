@@ -32,4 +32,8 @@ Browsers cache the local scripts aggressively. The `<script>` tags in `index.htm
 
 Published with GitHub Pages from `main` at https://nimrodh.github.io/kehila_links/. Work happens on `develop` (pushed to GitHub, no separate deploy) and is merged into `main` to publish.
 
-The site is intentionally hidden from search engines (`robots.txt` disallows all; `<meta name="robots" content="noindex, nofollow, noarchive">`). Keep both.
+The site is intentionally hidden from search engines. What protects it:
+
+- `<meta name="robots" content="noindex, nofollow, noarchive">` in `index.html` — keep it. It's the only real protection, because GitHub Pages can't send `X-Robots-Tag` headers.
+- `_config.yml` excludes everything the page doesn't need (README, CLAUDE.md, `.claude/`, unused image) from the Pages build. Without it Jekyll publishes `CLAUDE.md` as an indexable `CLAUDE.html`. Any new Markdown or HTML file added to the repo is published unless it's excluded there or carries its own noindex meta tag.
+- `robots.txt` here has no effect: crawlers only read `https://nimrodh.github.io/robots.txt`, not `/kehila_links/robots.txt`.

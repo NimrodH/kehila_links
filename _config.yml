@@ -1,0 +1,13 @@
+# GitHub Pages (Jekyll) build settings.
+#
+# The site must stay out of search engines. index.html carries a noindex
+# meta tag, but GitHub Pages can't send noindex headers for other files, and
+# Jekyll turns Markdown files into plain, indexable HTML pages. So publish
+# only what the page needs and keep everything else out of the site.
+exclude:
+  - README.md
+  - CLAUDE.md
+  - .claude
+  - .vscode
+  - "ChatGPT Image Sep 11, 2026, 09_15_27 AM.png"
+  - groupnames.xlsx
